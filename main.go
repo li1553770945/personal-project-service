@@ -23,8 +23,8 @@ import (
 	"github.com/kitex-contrib/obs-opentelemetry/provider"
 	"github.com/kitex-contrib/obs-opentelemetry/tracing"
 	etcd "github.com/kitex-contrib/registry-etcd"
+	"github.com/li1553770945/personal-project-service/kitex_gen/project/projectservice"
 	"github.com/li1553770945/personal-projects-service/biz/infra/container"
-	"github.com/li1553770945/personal-projects-service/kitex_gen/projects/projectsservice"
 	"log"
 	"net"
 	"os"
@@ -60,8 +60,8 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	svr := projectsservice.NewServer(
-		new(ProjectsServiceImpl),
+	svr := projectservice.NewServer(
+		new(ProjectServiceImpl),
 		server.WithSuite(tracing.NewServerSuite()),
 		server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: serviceName}),
 		server.WithRegistry(r),

@@ -2,7 +2,7 @@
 
 ## 初始化项目
 ```bash
-kitex -module "github.com/li1553770945/personal-projects-service" -service personal-projects-service idl/projects.thrift
+kitex -module "github.com/li1553770945/personal-project-service" -service personal-project-service idl/project.thrift
 cd biz/infra/container
 wire
 ```

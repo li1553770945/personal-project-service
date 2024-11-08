@@ -2,7 +2,7 @@ package config
 
 import (
 	"fmt"
-	"github.com/li1553770945/personal-projects-service/biz/constant"
+	"github.com/li1553770945/personal-project-service/biz/constant"
 	"gopkg.in/yaml.v3"
 	"os"
 	"path/filepath"

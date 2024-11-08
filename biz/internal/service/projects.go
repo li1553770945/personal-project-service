@@ -2,18 +2,18 @@ package project
 
 import (
 	"context"
-	"github.com/li1553770945/personal-projects-service/biz/constant"
-	"github.com/li1553770945/personal-projects-service/biz/internal/converter"
-	"github.com/li1553770945/personal-projects-service/kitex_gen/base"
-	"github.com/li1553770945/personal-projects-service/kitex_gen/projects"
+	"github.com/li1553770945/personal-project-service/biz/constant"
+	"github.com/li1553770945/personal-project-service/biz/internal/converter"
+	"github.com/li1553770945/personal-project-service/kitex_gen/base"
+	"github.com/li1553770945/personal-project-service/kitex_gen/project"
 )
 
-func (s *ProjectService) GetProjectNum(ctx context.Context) (*projects.ProjectNumResp, error) {
+func (s *ProjectService) GetProjectNum(ctx context.Context) (*project.ProjectNumResp, error) {
 	count, err := s.Repo.GetProjectsNum()
 	if err != nil {
 		return nil, err
 	}
-	return &projects.ProjectNumResp{
+	return &project.ProjectNumResp{
 		BaseResp: &base.BaseResp{
 			Code: constant.Success,
 		},
@@ -21,7 +21,7 @@ func (s *ProjectService) GetProjectNum(ctx context.Context) (*projects.ProjectNu
 	}, nil
 }
 
-func (s *ProjectService) GetProjects(ctx context.Context, req *projects.ProjectsReq) (*projects.ProjectsResp, error) {
+func (s *ProjectService) GetProjects(ctx context.Context, req *project.ProjectsReq) (*project.ProjectsResp, error) {
 	defaultSort := "default"
 	var defaultStatus int32 = 0
 	var defaultStart int32 = 0
@@ -41,7 +41,7 @@ func (s *ProjectService) GetProjects(ctx context.Context, req *projects.Projects
 
 	order, ok := sortFields[*sort]
 	if !ok {
-		return &projects.ProjectsResp{
+		return &project.ProjectsResp{
 			BaseResp: &base.BaseResp{
 				Code:    constant.InvalidInput,
 				Message: "排序参数错误",
@@ -72,7 +72,7 @@ func (s *ProjectService) GetProjects(ctx context.Context, req *projects.Projects
 	projectsResult, err := s.Repo.GetProjects(*start, *end, order, *status)
 
 	if err != nil {
-		return &projects.ProjectsResp{BaseResp: &base.BaseResp{
+		return &project.ProjectsResp{BaseResp: &base.BaseResp{
 			Code:    constant.SystemError,
 			Message: "数据库查询失败:" + err.Error(),
 		}}, nil

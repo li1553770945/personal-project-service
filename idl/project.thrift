@@ -1,4 +1,4 @@
-namespace go projects
+namespace go project
 include "base.thrift"
 
 struct ProjectsReq{
@@ -27,7 +27,7 @@ struct ProjectNumResp{
     1: required base.BaseResp baseResp
     2: optional i64 num
 }
-service ProjectsService {
+service ProjectService {
     ProjectsResp GetProjects(ProjectsReq req)
     ProjectNumResp GetProjectNum()
 }

@@ -1,8 +1,8 @@
 package container
 
 import (
-	"github.com/li1553770945/personal-projects-service/biz/infra/config"
-	"github.com/li1553770945/personal-projects-service/biz/internal/service"
+	"github.com/li1553770945/personal-project-service/biz/infra/config"
+	"github.com/li1553770945/personal-project-service/biz/internal/service"
 	"sync"
 )
 

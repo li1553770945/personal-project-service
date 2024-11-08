@@ -1,7 +1,7 @@
 package repo
 
 import (
-	"github.com/li1553770945/personal-projects-service/biz/internal/domain"
+	"github.com/li1553770945/personal-project-service/biz/internal/domain"
 	"gorm.io/gorm"
 )
 

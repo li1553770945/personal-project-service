@@ -1,6 +1,6 @@
 package repo
 
-import "github.com/li1553770945/personal-projects-service/biz/internal/domain"
+import "github.com/li1553770945/personal-project-service/biz/internal/domain"
 
 func (Repo *Repository) RemoveProject(projectID int32) error {
 	err := Repo.DB.Delete(&domain.ProjectEntity{}, projectID).Error

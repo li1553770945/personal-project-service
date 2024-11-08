@@ -1,7 +1,7 @@
 package domain
 
 import (
-	"github.com/li1553770945/personal-projects-service/biz/internal/do"
+	"github.com/li1553770945/personal-project-service/biz/internal/do"
 	"time"
 )
 

@@ -2,7 +2,7 @@ package database
 
 import (
 	"fmt"
-	"github.com/li1553770945/personal-projects-service/biz/infra/config"
+	"github.com/li1553770945/personal-project-service/biz/infra/config"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )

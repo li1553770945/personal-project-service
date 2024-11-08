@@ -2,15 +2,15 @@ package main
 
 import (
 	"context"
-	"github.com/li1553770945/personal-projects-service/biz/infra/container"
-	projects "github.com/li1553770945/personal-projects-service/kitex_gen/projects"
+	"github.com/li1553770945/personal-project-service/biz/infra/container"
+	"github.com/li1553770945/personal-project-service/kitex_gen/project"
 )
 
 // ProjectsServiceImpl implements the last service interface defined in the IDL.
-type ProjectsServiceImpl struct{}
+type ProjectServiceImpl struct{}
 
 // GetProjects implements the ProjectsServiceImpl interface.
-func (s *ProjectsServiceImpl) GetProjects(ctx context.Context, req *projects.ProjectsReq) (resp *projects.ProjectsResp, err error) {
+func (s *ProjectServiceImpl) GetProjects(ctx context.Context, req *project.ProjectsReq) (resp *project.ProjectsResp, err error) {
 	// TODO: Your code here...
 	App := container.GetGlobalContainer()
 	resp, err = App.ProjectService.GetProjects(ctx, req)
@@ -18,7 +18,9 @@ func (s *ProjectsServiceImpl) GetProjects(ctx context.Context, req *projects.Pro
 }
 
 // GetProjectNum implements the ProjectsServiceImpl interface.
-func (s *ProjectsServiceImpl) GetProjectNum(ctx context.Context) (resp *projects.ProjectNumResp, err error) {
+func (s *ProjectServiceImpl) GetProjectNum(ctx context.Context) (resp *project.ProjectNumResp, err error) {
 	// TODO: Your code here...
+	App := container.GetGlobalContainer()
+	resp, err = App.ProjectService.GetProjectNum(ctx)
 	return
 }

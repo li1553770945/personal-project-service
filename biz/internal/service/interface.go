@@ -2,8 +2,8 @@ package project
 
 import (
 	"context"
-	"github.com/li1553770945/personal-projects-service/biz/internal/repo"
-	"github.com/li1553770945/personal-projects-service/kitex_gen/projects"
+	"github.com/li1553770945/personal-project-service/biz/internal/repo"
+	"github.com/li1553770945/personal-project-service/kitex_gen/project"
 )
 
 type ProjectService struct {
@@ -11,7 +11,8 @@ type ProjectService struct {
 }
 
 type IProjectService interface {
-	GetProjects(ctx context.Context, req *projects.ProjectsReq) (*projects.ProjectsResp, error)
+	GetProjects(ctx context.Context, req *project.ProjectsReq) (*project.ProjectsResp, error)
+	GetProjectNum(ctx context.Context) (*project.ProjectNumResp, error)
 }
 
 func NewProjectService(repo repo.IRepository) IProjectService {

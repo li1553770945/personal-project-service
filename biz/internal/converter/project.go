@@ -1,10 +1,10 @@
 package converter
 
 import (
-	"github.com/li1553770945/personal-projects-service/biz/constant"
-	"github.com/li1553770945/personal-projects-service/biz/internal/domain"
-	"github.com/li1553770945/personal-projects-service/kitex_gen/base"
-	"github.com/li1553770945/personal-projects-service/kitex_gen/projects"
+	"github.com/li1553770945/personal-project-service/biz/constant"
+	"github.com/li1553770945/personal-project-service/biz/internal/domain"
+	"github.com/li1553770945/personal-project-service/kitex_gen/base"
+	"github.com/li1553770945/personal-project-service/kitex_gen/project"
 )
 
 func AssembleSuccessBaseResp() *base.BaseResp {
@@ -13,8 +13,8 @@ func AssembleSuccessBaseResp() *base.BaseResp {
 	}
 }
 
-func ProjectInfoEntityToDTO(projectEntities *[]domain.ProjectEntity) *projects.ProjectsResp {
-	var projectDataList []*projects.ProjectData
+func ProjectInfoEntityToDTO(projectEntities *[]domain.ProjectEntity) *project.ProjectsResp {
+	var projectDataList []*project.ProjectData
 
 	// 遍历每个 ProjectEntity，将其转换为 ProjectData
 	for _, entity := range *projectEntities {
@@ -29,7 +29,7 @@ func ProjectInfoEntityToDTO(projectEntities *[]domain.ProjectEntity) *projects.P
 		}
 
 		// 创建 ProjectData 并赋值
-		projectData := &projects.ProjectData{
+		projectData := &project.ProjectData{
 			Name:         entity.Name,
 			Desc:         entity.Desc,
 			Link:         entity.Link,
@@ -45,7 +45,7 @@ func ProjectInfoEntityToDTO(projectEntities *[]domain.ProjectEntity) *projects.P
 	}
 
 	// 构建并返回 ProjectsResp
-	return &projects.ProjectsResp{
+	return &project.ProjectsResp{
 		BaseResp:    AssembleSuccessBaseResp(),
 		ProjectData: projectDataList,
 	}
