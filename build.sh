@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-RUN_NAME="personal-projects-service"
+RUN_NAME="personal-project-service"
 
 mkdir -p output/bin
 cp script/* output/

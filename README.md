@@ -11,7 +11,7 @@ wire
 ```yml
 server:
   listen-address: 0.0.0.0:8890
-  service-name: personal-projects-service
+  service-name: personal-project-service
 
 etcd:
   endpoint:
