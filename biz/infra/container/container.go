@@ -21,9 +21,9 @@ func GetGlobalContainer() *Container {
 	return APP
 }
 
-func InitGlobalContainer(env string) {
+func InitGlobalContainer(cfg *config.Config) {
 	once.Do(func() {
-		APP = GetContainer(env)
+		APP = GetContainer(cfg)
 	})
 }
 
