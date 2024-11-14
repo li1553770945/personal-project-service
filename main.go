@@ -25,7 +25,6 @@ import (
 	etcd "github.com/kitex-contrib/registry-etcd"
 	"github.com/li1553770945/personal-project-service/biz/infra/container"
 	"github.com/li1553770945/personal-project-service/kitex_gen/project/projectservice"
-	"log"
 	"net"
 	"os"
 )
@@ -39,17 +38,13 @@ func main() {
 	App := container.GetGlobalContainer()
 
 	serviceName := App.Config.ServerConfig.ServiceName
-	p := provider.NewOpenTelemetryProvider(
-		provider.WithServiceName(serviceName),
-		provider.WithExportEndpoint(App.Config.OpenTelemetryConfig.Endpoint),
-		provider.WithInsecure(),
-	)
+
 	defer func(p provider.OtelProvider, ctx context.Context) {
 		err := p.Shutdown(ctx)
 		if err != nil {
 			klog.Fatalf("server stopped with error:%s", err)
 		}
-	}(p, context.Background())
+	}(App.Trace.Provider, context.Background())
 
 	addr, err := net.ResolveTCPAddr("tcp", App.Config.ServerConfig.ListenAddress)
 	if err != nil {
@@ -58,7 +53,7 @@ func main() {
 
 	r, err := etcd.NewEtcdRegistry(App.Config.EtcdConfig.Endpoint) // r should not be reused.
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 	svr := projectservice.NewServer(
 		new(ProjectServiceImpl),

@@ -2,11 +2,15 @@ package container
 
 import (
 	"github.com/li1553770945/personal-project-service/biz/infra/config"
+	"github.com/li1553770945/personal-project-service/biz/infra/log"
+	"github.com/li1553770945/personal-project-service/biz/infra/trace"
 	"github.com/li1553770945/personal-project-service/biz/internal/service"
 	"sync"
 )
 
 type Container struct {
+	Trace          *trace.TraceStruct
+	Logger         *log.TraceLogger
 	Config         *config.Config
 	ProjectService project.IProjectService
 }
@@ -21,17 +25,23 @@ func GetGlobalContainer() *Container {
 	return APP
 }
 
-func InitGlobalContainer(cfg *config.Config) {
+func InitGlobalContainer(env string) {
 	once.Do(func() {
-		APP = GetContainer(cfg)
+		APP = GetContainer(env)
 	})
 }
 
-func NewContainer(config *config.Config, projectService project.IProjectService,
+func NewContainer(config *config.Config,
+	logger *log.TraceLogger,
+	traceStruct *trace.TraceStruct,
+
+	projectService project.IProjectService,
 ) *Container {
 	return &Container{
 		Config:         config,
+		Logger:         logger,
 		ProjectService: projectService,
+		Trace:          traceStruct,
 	}
 
 }

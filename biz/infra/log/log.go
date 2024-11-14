@@ -74,8 +74,9 @@ func (l *TraceLogger) CtxFatalf(ctx context.Context, format string, v ...interfa
 	l.Logger.CtxFatalf(ctx, format, v...)
 }
 
-func InitLog() {
-	klog.SetLogger(NewTraceLogger())
+func InitLog() *TraceLogger {
+	logger := NewTraceLogger()
+	klog.SetLogger(logger)
 	klog.SetLevel(klog.LevelInfo)
 	if err := os.MkdirAll("logs", os.ModePerm); err != nil {
 		klog.Fatalf("创建日志文件夹失败：%v", err)
@@ -88,4 +89,5 @@ func InitLog() {
 	}
 	multiWriter := io.MultiWriter(logFile, os.Stdout)
 	klog.SetOutput(multiWriter)
+	return logger
 }

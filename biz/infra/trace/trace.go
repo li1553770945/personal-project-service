@@ -1,16 +1,20 @@
 package trace
 
 import (
-	"github.com/hertz-contrib/obs-opentelemetry/provider"
-	"github.com/li1553770945/sheepim-user-service/biz/infra/config"
+	"github.com/kitex-contrib/obs-opentelemetry/provider"
+	"github.com/li1553770945/personal-project-service/biz/infra/config"
 )
 
-func InitTrace(config *config.Config) provider.OtelProvider {
+type TraceStruct struct {
+	Provider provider.OtelProvider
+}
+
+func InitTrace(config *config.Config) *TraceStruct {
 	p := provider.NewOpenTelemetryProvider(
 		provider.WithServiceName(config.ServerConfig.ServiceName),
 		provider.WithExportEndpoint(config.OpenTelemetryConfig.Endpoint),
 		provider.WithInsecure(),
 	)
-	return p
+	return &TraceStruct{Provider: p}
 
 }
